@@ -1,2 +1,4 @@
-The three key components fo this solution are Jetson Nano 2GB, AWS cloud(S3, Lambda function, SES) and a smart phone with email configured on it. 
-When a video from car parking is streamed into an Object Detector application, it scans the video.
+The three key components for this solution are NVIDIA Jetson Nano 2GB, AWS cloud(S3, Lambda function, SES) and a smart phone with email configured on it. Jetson Nano has all the built-in CUDA, TRT, Gstreamer is installed and configured. An additional module called jetson-inference should also be configured( instructions for the same is provided in the link) 
+
+When a video from car parking taken around car is streamed into an Object Detector application, it scans the video. If the Object Detector finds any stranger near the car in the night, a bounding box is drawn around the person. The application takes snapshot of the intruder's image and uploads onto AWS S3 bucket. 
+As soon as a new object is PUT into the s3 bucket, an AWS service called Lambda gets triggered and it sends an email alert to the Car Owner with the image of intruder. For email, SES service is used.
